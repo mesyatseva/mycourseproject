@@ -1,0 +1,269 @@
+{% extends "CookBook/layout/base.html" %}
+
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %}{{ recipe.name }} {% endblock %}
+
+
+{#  <!-- Font Awesome -->#}
+{#  <link rel="stylesheet" href="assets/css/all.css">#}
+{#  <!-- Bootstrap -->#}
+{#  <link rel="stylesheet" href="assets/css/bootstrap.css">#}
+{#  <!-- Lightbox -->#}
+{#  <link href="assets/css/lightbox.min.css" rel="stylesheet">#}
+{#  <!-- Custom -->#}
+{#  <link rel="stylesheet" href="assets/css/style.css">#}
+
+{% block content %}
+
+    <body>
+
+    <!-- Breadcrumb -->
+    <section id="bc" class="mt-3">
+        <div class="container">
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'CookBook:index' %}">На главную</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'CookBook:all_kitchens' %}">Все кухни</a>
+                    </li>
+                    <li class="breadcrumb-item active">Рецепт "{{ recipe.name }}"</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Listing -->
+    <section id="listing" class="py-4">
+        <div class="container">
+            {#                        <a href="#" class="btn btn-light mb-4">Назад к списку</a>#}
+            <input type="button" onclick="history.back();" value="Назад"/>
+            <div class="row">
+                <div class="col-md-9"> {# добавила зону для печати #}
+                    <h2>Рецепт "{{ recipe.name }}"</h2>
+
+
+                    {#                    Здесь потом будут вложены фотографии, динамически, но это чуть позже #}
+
+                    <!-- Home CookBook Image -->
+                    <!-- Картинки -->
+                    {% if recipe.image %}
+                        <img class="img-CookBook img-fluid mb-3" src="{{ recipe.image.url }}" alt="">
+                    {% else %}
+                        <img class="img-CookBook img-fluid mb-3" src="{% static 'CookBook/images/NoPhotoSorry.jfif' %}"
+                             alt="">
+                    {% endif %}
+
+
+                    <!-- Несколько картинок для красоты -->
+                    <div class="row mb-5 thumbs">
+                        {% if recipe.image_1 %} {# Добавила #}
+                            <div class="col-md-2">
+
+                                <a href="{{ recipe.image_1.url }}" data-lightbox="home-images">
+
+                                    <img src="{{ recipe.image_1.url }}" alt="" class="img-fluid">
+                                </a>
+                            </div>
+                        {% endif %} {# Добавила #}
+                        {% if recipe.image_2 %} {# Добавила #}
+                            <div class="col-md-2">
+
+                                <a href="{{ recipe.image_2.url }}" data-lightbox="home-images">
+
+                                    <img src="{{ recipe.image_2.url }}" alt="" class="img-fluid">
+                                </a>
+                            </div>
+                        {% endif %} {# Добавила #}
+
+                    </div>
+
+
+                    <!-- Fields: name, kitchen, dish, difficult, cooktime, author, created_at -->
+                    <div class="row mb-5 fields">
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item text-secondary">
+                                    Кухня
+                                    <span class="float-right">{{ recipe.kitchen }}</span>
+                                </li>
+                                <li class="list-group-item text-secondary">
+                                    Сложность:
+                                    <span class="float-right">{{ recipe.difficulty.title }}</span>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item text-secondary">
+                                    Блюдо:
+                                    <span class="float-right">{{ recipe.dish }}</span>
+                                </li>
+                                <li class="list-group-item text-secondary">
+                                    Время приготовления:
+                                    <span class="float-right">{{ recipe.cooktime }}</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <hr>
+
+                        <div class="col-md-12">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item text-secondary">
+                                    Рецепт опубликовал пользователь:
+                                    <span class="float-right">{{ recipe.author }}</span>
+                                    {#                                    <span class="float-right">{{ recipe.author__firstname }}</span>#}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Description and Steps-->
+                    <div class="row mb-5">
+                        <div class="col-md-12">
+                            <h3>Описание рецепта</h3>
+                            <p>{{ recipe.description }}</p>
+                        </div>
+
+                        <div class="col-md-12">
+                            <h3>Пошаговая инструкция рецепта</h3>
+                            <p>{{ recipe.steps }}</p>
+                        </div>
+                    </div>
+                    {#<a href="{% url 'CookBook:recipe_change' slug=kitchen.slug pk=recipe.pk %}">Изменить рецепт</a>#}
+
+                    {% if user.is_authenticated %}
+                        <!--Раздел "Комментарии"-->
+                        {% for comment in comments %}
+                            <div class="col-md-12">
+                                <p class="info">
+                                    Комментарий {{ forloop.counter }} от {{ comment.user }}
+                                    {{ comment.created }}
+                                </p>
+                                {{ comment.body }}
+                            </div>
+                        {% empty %}
+                            <p>Комментариев нет. Оставьте первый комментарий! </p>
+                        {% endfor %}
+
+                        <!-- Новый комментарий -->
+                        {% if new_comment %}
+                            <h3>Ваш комментарий добавлен</h3>
+                        {% else %}
+                            <h3>Добавить новый комментарий</h3>
+                            <form action="." method="post">
+                                {% csrf_token %}
+                                {% bootstrap_form comment_form layout='horizontal' %}
+                                {% buttons submit='Написать комментарий' %}{% endbuttons %}
+                            </form>
+                        {% endif %}
+                        </div>
+                    {% endif %}
+
+
+                <div class="col-md-3">
+                    {% if recipe.author != request.user and user.is_authenticated %}
+                        {# Попытка динамической реализации кнопки #}
+                        {#                        <button class="btn-primary btn-block btn-lg" href="#">#}
+                        {#                            Добавить рецепт в список понравившихся#}
+                        {#                        </button>#}
+                        <form method="post" action="{% url 'CookBook:delete_liked_recipe_from_profile' pk=recipe.pk %}"
+                              name="delete_liked_recipe_from_profile" class="add_or_delete_liked_recipe">
+                            {% csrf_token %}
+                            {% buttons submit='Удалить из списка понравившихся' %}{% endbuttons %}
+                        </form>
+
+
+                        <form method="post" action="{% url 'CookBook:add_liked_recipe_to_profile' pk=recipe.pk %}"
+                              name="add_to_profile_liked" class="add_or_delete_liked_recipe">
+                            {% csrf_token %}
+                            {% buttons submit='Добавить в список понравившихся' %}{% endbuttons %}
+                            {#                        <input type="submit" value="Добавить в список понравившихся">#}
+                        </form>
+
+                        <a class="btn-primary btn-block btn-lg" href="javascript:print();"> Распечатать</a>
+                    {% endif %}
+
+                    {#                <a href="{% url 'CookBook:profile' %}" class="btn btn-primary btn-block btn-lg">Перейти в свой профиль</a>#}
+                    {##}
+                    {#                    <button class="btn-primary btn-block btn-lg" data-toggle="modal" href="{% url 'CookBook:profile' %}">Перейти#}
+                    {#                        в свой профиль#}
+                    {#                    </button>#}
+
+                    {% if recipe.author == request.user %}
+
+                        <a href="{% url 'CookBook:change_recipe' pk=recipe.pk %}"
+                           class="btn btn-primary btn-block btn-lg">Изменить рецепт</a>
+                        <a href="{% url 'CookBook:delete_recipe' pk=recipe.pk %}"
+                           class="btn btn-primary btn-block btn-lg">Удалить рецепт</a>
+                        {#                    <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Изменить рецепт#}
+                        {#                    </button>#}
+                        {##}
+                        {#                    <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Удалить рецепт#}
+                        {#                    </button>#}
+                    {% endif %}
+
+                    <a href="http://vk.com/share.php?url=https://127.0.0.1.8000/{{ recipe.get_absolute_url }}"
+                       onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+                       target="_blank" rel="nofollow">
+                        <img src="{% static 'CookBook/images/vk.png' %}">
+                    </a>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    {#    <!-- Inquiry Modal -->#}
+    {#    <div class="modal fade" id="inquiryModal" role="dialog">#}
+    {#        <div class="modal-dialog">#}
+    {#            <div class="modal-content">#}
+    {#                <div class="modal-header">#}
+    {#                    <h5 class="modal-title" id="inquiryModalLabel">Make An Inquiry</h5>#}
+    {#                    <button type="button" class="close" data-dismiss="modal">#}
+    {#                        <span>&times;</span>#}
+    {#                    </button>#}
+    {#                </div>#}
+    {#                <div class="modal-body">#}
+    {#                    <form>#}
+    {#                        <div class="form-group">#}
+    {#                            <label for="property_name" class="col-form-label">Property:</label>#}
+    {#                            <input type="text" name="listing" class="form-control" value="45 Drivewood Cirlce" disabled>#}
+    {#                        </div>#}
+    {#                        <div class="form-group">#}
+    {#                            <label for="name" class="col-form-label">Name:</label>#}
+    {#                            <input type="text" name="name" class="form-control" required>#}
+    {#                        </div>#}
+    {#                        <div class="form-group">#}
+    {#                            <label for="email" class="col-form-label">Email:</label>#}
+    {#                            <input type="email" name="email" class="form-control" required>#}
+    {#                        </div>#}
+    {#                        <div class="form-group">#}
+    {#                            <label for="phone" class="col-form-label">Phone:</label>#}
+    {#                            <input type="text" name="phone" class="form-control">#}
+    {#                        </div>#}
+    {#                        <div class="form-group">#}
+    {#                            <label for="message" class="col-form-label">Message:</label>#}
+    {#                            <textarea name="message" class="form-control"></textarea>#}
+    {#                        </div>#}
+    {#                        <hr>#}
+    {#                        <input type="submit" value="Send" class="btn btn-block btn-secondary">#}
+    {#                    </form>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+
+
+    {#        <script src="{% static 'CookBook/js/jquery-3.3.1.min.js' %}"></script>#}
+    {#        <script src="{% static 'CookBook/js/bootstrap.bundle.min.js' %} "></script>#}
+    {#        <script src="{% static 'CookBook/js/lightbox.min.js '%}"></script>#}
+    {#        <script src="{% static 'CookBook/js/CookBook.js'%} "></script>#}
+
+{% endblock %}

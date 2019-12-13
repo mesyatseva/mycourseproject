@@ -1,0 +1,36 @@
+{% extends 'CookBook/layout/base.html' %}
+
+{% load static %}
+
+{% block title %} О сайте {% endblock %}
+
+{% block content %}
+    <div class="container" >
+        <div id="article-about-site">
+            <h2>О сайте</h2>
+            <p>Сайт разрабатывается в рамках курсового проекта.</p>
+            <p>Студентка: Месяцева Н. В.</p>
+            <p>Группа: ИУ8Ц-51.</p>
+            <p>Преподаватель: Бородин А. А.</p>
+        </div>
+    </div>
+
+    <section id="services" class="py-5 bg-secondary text-white">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-6" id="images-me-university">
+                    <img src="{% static 'CookBook/images/Gerb_mgtu.png' %}" alt="" width="250px" height="250px">
+                    <hr>
+                    <h3>МГТУ им. Н.Э. Баумана</h3>
+
+                </div>
+                <div class="col-md-6" id="images-me-university">
+                    <img src="{% static 'CookBook/images/Information_Security.png' %}" alt="" width="250px" height="250px">
+                    <hr>
+                    <h3>Кафедра ИУ8</h3>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

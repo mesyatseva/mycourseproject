@@ -1,0 +1,101 @@
+/*@font-face {*/
+/*    font-family: Bad Script;*/
+/*    src: url('https://fonts.googleapis.com/css?family=Bad+Script&display=swap&subset=cyrillic');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'Bad Script', cursive;*/
+/*}*/
+
+/*#primer {*/
+/*    font-family: 'Comic Sans MS', cursive;*/
+/*}*/
+
+
+/*#titlename{*/
+/*    font-family: "Bad Script", cursive;*/
+/*}*/
+
+
+*{
+    transition: .5s all ease;
+}
+
+
+.nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    background-color: #d2c5c7;
+    padding: 0 30px;
+    box-shadow: 0 2px 0 rgba(0,0,0, .24);
+    position: fixed;
+    width: 100%;
+}
+
+
+.kitchen-navbar{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    list-style: none;
+}
+
+#showcase {
+    background: url(../images/cat_on_kitchen.png) no-repeat top center fixed;
+    background-size: 100%;
+    position: relative;
+    min-height: 800px;
+    color: black;
+    padding-top: 6rem;
+}
+
+#showcase_search{
+    background: url(../images/cat_on_kitchen.png) no-repeat top center fixed;
+    background-size: 100%;
+    position: relative;
+    min-height: 550px;
+    color: black;
+    padding-top: 1.5rem;
+}
+
+.home-search{
+    background: #c8ab8a;
+    border-radius: 50px;
+    opacity: 0.97;  /* Прозрачность */
+}
+
+#column-center{
+    text-align: center;
+}
+
+#dropzindex{
+    z-index: 10000;
+}
+
+#bigindex{
+    z-index: 50000;
+}
+
+
+img.main-image{
+    width: 300px;
+}
+
+img.additional-image{
+    width: 180px;
+}
+
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.container {
+  flex: 1;
+}
+

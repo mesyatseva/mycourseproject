@@ -1,0 +1,163 @@
+{% load bootstrap4 %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=l, shrink-to-fit=no">
+
+    <title>{% block title %} Главная {% endblock %} - Кулинарная книга </title>
+
+        <link href="https://fonts.googleapis.com/css?family=Bad+Script&display=swap" rel="stylesheet">
+
+    {% bootstrap_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'CookBook/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'CookBook/css/bootstrap.css' %}">
+
+    {% bootstrap_javascript jquery='slim' %}
+</head>
+
+<body>
+
+
+<!-- Top Bar -->
+<section id="top-bar" class="p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-6" id="column-center">
+                <i>Наталья Месяцева, 2 курс</i>
+            </div>
+            <div class="col-6" id="column-center">
+                <a href="https://vk.com/natamesyatseva">Связаться со мной ВК </a>
+{#                                <a href="https://vk.com/natamesyatseva">#}
+{#                                    <img src="https://img.icons8.com/metro/26/000000/vk-com--v1.png" alt="">#}
+{#                                </a>#}
+                {#                <a href="#">#}
+                {#                    <img src="https://img.icons8.com/metro/26/000000/instagram.png" alt="">#}
+                {#                </a>#}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Шапка -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="bigindex">
+    <div class="container">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAlt">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavAlt">
+            <ul class="navbar-nav">
+                <li class="nav-item active mr-3">
+
+                    <a class="nav-link" id="titlename" href="{% url 'CookBook:index' %}" >Дома вкусно</a>
+                </li>
+                <li class="nav-item mr-3">
+                    <a class="nav-link" href="{% url 'CookBook:other' page='about' %}">О сайте</a>
+                </li>
+                {#                <li class="nav-item mr-3">#}
+                {#                    <a class="nav-link" href="#">Рецепт дня</a>#}
+                {#                </li>#}
+
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">Профиль</a>
+
+                        <div class="dropdown-menu" id="dropzindex">
+
+                            <a class="dropdown-item" href="{% url 'CookBook:profile' %}">Moи рецепты</a>
+                            {#                            <a class="dropdown-item" href="#">Изменить личные данные</a>#}
+                            <a class="dropdown-item" href="{% url 'CookBook:profile_change' %}">Изменить личные
+                                данные</a>
+                            {#                            <a class="dropdown-item" href="#">Изменить пароль</a>#}
+                            <a class="dropdown-item" href="{% url 'CookBook:password_change' %}">Изменить пароль</a>
+
+                            <a class="dropdown-item" href="{% url 'CookBook:logout' %}">Выйти</a>
+
+                        </div>
+                    </li>
+
+                {% else %}
+                    <li class="nav-item mr-3">
+                        <a class="nav-link" href="{% url 'CookBook:login' %}">Вход</a>
+                    </li>
+
+                    <li class="nav-item mr-3">
+                        <a class="nav-link" href="{% url 'CookBook:register' %}">Регистрация</a>
+                    </li>
+                {% endif %}
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="#" class="logo" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav">
+                <!-- Кухня -->
+                <li class="nav-listing active mr-3">
+                    <a class="nav-link" href="#"></a>
+                </li>
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">Кухня</a>
+
+                    <div class="dropdown-menu" id="dropzindex">
+                        <a class="dropdown-item" href="{% url 'CookBook:all_kitchens' %}">Все кухни</a>
+                        <hr>
+
+
+                        <!-- Переделать под джанго сслылки -->
+                        {% for kitchen in kitchens %}
+                            <a class="dropdown-item"
+                               href="{% url 'CookBook:kitchens' slug=kitchen.slug %}">{{ kitchen.name }}</a>
+                        {% endfor %}
+                    </div>
+                </li>
+
+
+                {% for dish in dishes %}
+                    <li class="nav-listing mr-3">
+                        <a class="nav-link" href="{% url 'CookBook:dishes' slug=dish.slug %}">{{ dish.name }}</a>
+                    </li>
+                {% endfor %}
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+
+{% block content %}
+{% endblock %}
+
+<!-- Footer -->
+<footer id="CookBook-footer" class="py-4 bg-primary text-white text-center">
+{#<footer class = "navbar fixed-bottom">#}
+    Натали Месяцева &copy;
+    <span class="year"></span> Курсовой проект
+</footer>
+
+</body>
+</html>

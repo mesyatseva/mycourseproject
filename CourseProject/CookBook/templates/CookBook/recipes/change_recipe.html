@@ -1,0 +1,18 @@
+{% extends 'CookBook/layout/base.html' %}
+
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %} Создание рецепта {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 style="text-align: center">Изменение рецепта</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form layout='horizontal' %}
+{#            {% bootstrap_formset formset layout='horizontal' %}#}
+            {% buttons submit='Сохранить изменения' %}{% endbuttons %}
+        </form>
+    </div>
+{% endblock %}

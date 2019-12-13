@@ -1,0 +1,114 @@
+{% extends "CookBook/layout/base.html" %}
+
+{#{% load thumbnail %}#}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %} {{ kitchen }} {% endblock %}
+
+{% block searchform %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="container mb-2">
+        <h2 class="mb-2" align="center">{{ kitchen }}</h2>
+        <div class="row">
+            <div class="col">&nbsp;</div>
+            <form class="col-mb-auto form-inline">
+                {% bootstrap_form small_search_form show_label=True %}
+                {% bootstrap_button content='Искать' button_type='submit' %}
+            </form>
+        </div>
+    </div>
+
+
+    {% if recipes %}
+        <section id="listings" class="py-5">
+            <div class="container">
+                <div class="row">
+                    {% for recipe in recipes %}
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card listing-preview">
+
+                                <!-- Картинки -->
+                                {% if recipe.image %}
+                                    <img class="card-img-top" src="{{ recipe.image.url }}" alt="" width="300px"
+                                         height="250px">
+                                {% else %}
+                                    <img class="card-img-top" src="{% static 'CookBook/images/NoPhotoSorry.jfif' %}"
+                                         alt="" width="300px"
+                                         height="250px">
+                                {% endif %}
+
+                                {#                                <div class="card-img-overlay">#}
+                                {#                                    <h2>#}
+                                {#                                        <span class="badge badge-secondary text-white">{{ recipe.kitchen }}</span>#}
+                                {#                                    </h2>#}
+                                {#                                </div>#}
+                                <div class="card-body">
+
+                                    <div class="listing-heading text-center">
+
+                                        {#                                    <div class="media-body">#}
+                                        {#                                        <h3><a href="{{ url }}{{ all }}">#}
+                                        {#                                            {{ recipe.name }}#}
+                                        {#                                        </a></h3>#}
+                                        {#                                    </div>#}
+
+                                        <h4 class="text-primary"><a
+                                                href="{% url 'CookBook:detail' pk=recipe.pk %}">{{ recipe.name }}</a>
+                                        </h4>
+                                        {#                                    <h4 class="text-primary"><a href="/kitchens/{{ recipe.kitchen__slug }}/{{ recipe.pk }}">{{ recipe.name }}</a></h4>#}
+                                        <p>
+                                            <i class="fas fa-map-marker text-secondary"></i> {{ recipe.dish }} </p>
+                                    </div>
+                                    <hr>
+                                    <div class="row py text-secondary">
+                                        <div class="col-12">
+                                            <i class="fas fa-th-large"></i> {{ recipe.description }}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row py-2 text-secondary">
+                                        <div class="col-6">
+                                            <i class="fas fa-bed"></i>Время приготовления: {{ recipe.cooktime }}
+                                        </div>
+                                        <div class="col-6">
+                                            <i class="fas fa-bath"></i> Сложность: {{ recipe.difficulty }}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row py-2 text-secondary">
+                                        <div class="col-6">
+                                            <i class="fas fa-user"></i> {{ recipe.author }}
+                                        </div>
+                                    </div>
+                                    <div class="row text-secondary pb-2">
+                                        <div class="col-6">
+                                            <i class="fas fa-clock"></i> {{ recipe.published }}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <a href="{% url 'CookBook:detail' pk=recipe.pk %}"
+                                       class="btn btn-primary btn-block">Нажмите, чтобы узнать больше</a>
+                                    {#                                    <a href="{% url 'CookBook:index' %}" class="btn btn-primary btn-block">Нажмите,#}
+                                    {#                                        чтобы узнать больше</a>#}
+                                    {#                                    <button formaction="{% url 'CookBook:detail' slug=kitchen.slug pk=recipe.pk as url %}"#}
+                                    {#                                            class="btn btn-primary btn-block">Нажмите, чтобы узнать больше#}
+                                    {#                                    </button>#}
+                                    {# УБРАЛА SLUG #}
+
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+                {% bootstrap_pagination page url=keyword %}
+            </div>
+        </section>
+    {% endif %}
+
+{% endblock %}

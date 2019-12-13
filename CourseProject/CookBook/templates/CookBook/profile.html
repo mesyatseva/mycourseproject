@@ -1,0 +1,104 @@
+{% extends 'CookBook/layout/base.html' %}
+
+
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %} Профиль пользователя {% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% if user.first_name and user.last_name %}
+            <h2>Профиль пользователя: {{ user.first_name }} {{ user.last_name }}</h2>
+        {% else %}
+            <h2>Профиль пользователя: логин "{{ user.username }}"</h2>
+        {% endif %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+{#                    <a href="#" class="btn btn-primary btn-block">+ Добавить новый рецепт</a>#}
+                    <a href="{% url 'CookBook:create_recipe' %}" class="btn btn-primary btn-block">+ Добавить новый рецепт</a>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <a href="{% url 'CookBook:profile' %}" class="btn btn-primary btn-block">Посмотреть мои рецепты</a>
+                </div>
+
+                <div class="col-md-4 mb-4">
+{#                    <a href="#" class="btn btn-primary btn-block">Понравившиеся рецепты</a>#}
+                    <a href="{% url "CookBook:profile_liked" %}" class="btn btn-primary btn-block">Понравившиеся рецепты</a>
+                </div>
+            </div>
+        </div>
+
+
+        <section id="listings" class="py-5">
+            <h2>Мои рецепты: {{ count }}</h2>
+            <div class="container">
+                <div class="row">
+                    {% for recipe in myRecipes %}
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card listing-preview">
+
+                                <!-- Картинки -->
+                                {% if recipe.image %}
+                                    <img class="card-img-top" src="{{ recipe.image.url }}" alt="" width="300px"
+                                         height="250px">
+                                {% else %}
+                                    <img class="card-img-top" src="{% static 'CookBook/images/NoPhotoSorry.jfif' %}"
+                                         alt="" width="300px"
+                                         height="250px">
+                                {% endif %}
+
+{#                                <div class="card-img-overlay">#}
+{#                                    <h2>#}
+{#                                        <span class="badge badge-secondary text-white">{{ recipe.kitchen }}</span>#}
+{#                                    </h2>#}
+{#                                </div>#}
+                                <div class="card-body">
+                                    <div class="listing-heading text-center">
+{#                                        <h4 class="text-primary" href="{% url "CookBook:detail" pk=recipe.pk %}">{{ recipe.name }}</h4>#}
+                                        <h4 class="text-primary"><a href="{% url 'CookBook:detail' pk=recipe.pk %}"> {{recipe.name}} </a></h4>
+                                        <p>
+                                            <i class="fas fa-map-marker text-secondary"></i> {{ recipe.dish }}, {{ recipe.kitchen }}
+                                        </p>
+                                    </div>
+                                    <hr>
+                                    <div class="row py text-secondary">
+                                        <div class="col-12">
+                                            <i class="fas fa-th-large"></i> {{ recipe.description }}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row py-2 text-secondary">
+                                        <div class="col-6">
+                                            <i class="fas fa-bed"></i>Время приготовления: {{ recipe.cooktime }}
+                                        </div>
+                                        <div class="col-6">
+                                            <i class="fas fa-bath"></i> Сложность: {{ recipe.difficulty.title }}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row py-2 text-secondary">
+                                        <div class="col-6">
+                                            <i class="fas fa-user"></i> {{ recipe.author }}
+                                        </div>
+                                    </div>
+                                    <div class="row text-secondary pb-2">
+                                        <div class="col-6">
+                                            <i class="fas fa-clock"></i> {{ recipe.created_at }}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <a href="{% url "CookBook:detail" pk=recipe.pk %}" class="btn btn-primary btn-block">Нажмите, чтобы узнать больше</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+{#            {% bootstrap_pagination page url=keyword %}#}
+        </section>
+    </div>
+{% endblock %}

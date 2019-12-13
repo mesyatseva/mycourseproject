@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Дома Лучше</title>
+
+    <!-- Ссылки на Bootstrap4-->
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+
+    <!-- Ссылка на собственный файл CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Стиль текста, потом -->
+
+</head>
+
+<body>
+    
+<!-- Шапка -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="assets/img/logo.png" class="logo" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+     
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <ul class="navbar-nav">
+            <li class="nav-item active mr-3">
+              <a class="nav-link" href="index.html">Дома лучше</a>
+            </li>
+            <li class="nav-item mr-3">
+              <a class="nav-link" href="about.html">О сайте</a>
+            </li>
+            <li class="nav-item mr-3">
+              <a class="nav-link" href="listings.html">Рецепт дня</a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item mr-3">
+              <a class="nav-link" href="register.html">
+                <i class="fas fa-user-plus"></i>Регистрация</a>
+            </li>
+            <li class="nav-item mr-3">
+              <a class="nav-link" href="login.html">
+                <i class="fas fa-sign-in-alt"></i>
+                Вход</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+</nav>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="assets/img/logo.png" class="logo" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+     
+      <div class="collapse navbar-collapse">
+          <ul class="navbar-nav">
+            <!-- Кухня -->
+            <li class="nav-listing active mr-3">
+              <a class="nav-link" href="index.html">Кухня</a>
+            </li>
+
+            <!-- Закуски -->
+            <li class="nav-listing mr-3">
+              <a class="nav-link" href="about.html">Закуски</a>
+            </li>
+
+            <!-- Салаты -->
+            <li class="nav-listing mr-3">
+              <a class="nav-link" href="listings.html">Салаты</a>
+            </li>
+
+            <!-- Супы -->
+            <li class="nav-listing active mr-3">
+              <a class="nav-link" href="index.html">Супы</a>
+            </li>
+
+            <!-- Горячие блюда -->
+            <li class="nav-listing mr-3">
+              <a class="nav-link" href="about.html">Горячие блюда</a>
+            </li>
+
+            <!-- Десерты -->
+            <li class="nav-listing mr-3">
+              <a class="nav-link" href="listings.html">Десерты</a>
+            </li>
+          </ul>
+
+      </div>
+  </div>
+</nav>
+
+
+
+
+<!-- Showcase -->
+<section id="showcase">
+    <div class="container text-center">
+      <div class="home-search p-5">
+        <div class="overlay p-5">
+          <h1 class="display-4 mb-4">
+            Найдите ваш любимый рецепт!
+          </h1>
+          <p class="lead">Здесь вы обязательно найдете тот рецепт, 
+              который хотите приготовить
+          </p>
+          <div class="search">
+            <form action="search.html">
+              <!-- Form Row 1 -->
+              <div class="form-row">
+                <!-- Кухня -->
+                <div class="col-md-3 mb-3">
+                    <select name="kitchen_select" class="form-control">
+                      <option selected="true" disabled="disabled">Кухня: Не важно</option>
+                      <option value="UT">Украинская кухня</option>
+                      <option value="VT">Украинская кухня</option>
+                      <option value="VA">Украинская кухня</option>
+                      <option value="WA">Украинская кухня</option>
+                      <option value="WV">Украинская кухня</option>
+                      <option value="WI">Украинская кухня</option>
+                      <option value="WY">Украинская кухня</option>
+                    </select>
+                  </div>
+
+
+
+                <!-- Мясо -->
+                <div class="col-md-3 mb-3">
+                  <input type="text" name="meat_keyword" class="form-control" placeholder="Название мяса">
+                </div>
+
+
+                <!-- Овощи -->
+                <div class="col-md-3 mb-3">
+                  <label class="sr-only">City</label>
+                  <input type="text" name="vegetables" class="form-control" placeholder="Овощи">
+                </div>
+
+                
+                <!-- Фрукты -->
+                <div class="col-md-3 mb-3">
+                    <label class="sr-only">City</label>
+                    <input type="text" name="fruits" class="form-control" placeholder="Фрукты">
+                </div>
+
+              </div>
+
+              <!-- Form Row 2 -->
+              <div class="form-row">
+                <div class="col-md-6 mb-3">
+                  <!-- <label class="sr-only">Bedrooms</label> -->
+                  <select name="bedrooms" class="form-control">
+                    <option selected="true" disabled="disabled">Время приготовления: Не важно</option>
+                    <option value="1">до 30 минут</option>
+                    <option value="2">до 1 часа</option>
+                    <option value="3">до 2 часов</option>
+                    <option value="4">до 3 часов</option>
+                    <option value="5">до 4 часов</option>
+                    <option value="five">до 5 часов</option>
+                    <option value="sixhours">до 6 часов</option>
+                    <option value="allday">Целый день</option>
+                  </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <select name="dificulty" class="form-control" id="type">
+                    <option selected="true" disabled="disabled">Сложность: Любая</option>
+                    <option value="100000">Очень легко</option>
+                    <option value="200000">Легко</option>
+                    <option value="300000">Нормально</option>
+                    <option value="400000">Тяжело</option>
+                    <option value="500000">Очень тяжело</option>
+                  </select>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="listings" class="py-5">
+      <div class="container">
+        <h3 class="text-center mb-3">Latest Listings</h3>
+        <div class="row">
+          <!-- Listing 1 -->
+          <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card listing-preview">
+              <img class="card-img-top" src="images/Olivje.jpg" alt="" width="300px" height="200px">
+              <div class="card-img-overlay">
+                <h2>
+                  <span class="badge badge-secondary text-white">$490,000</span>
+                </h2>
+              </div>
+              <div class="card-body">
+                <div class="listing-heading text-center">
+                  <h4 class="text-primary">45 Drivewood Circle</h4>
+                  <p>
+                    <i class="fas fa-map-marker text-secondary"></i> Norwood MA, 02062</p>
+                </div>
+                <hr>
+                <div class="row py-2 text-secondary">
+                  <div class="col-6">
+                    <i class="fas fa-th-large"></i> Sqft: 2500</div>
+                  <div class="col-6">
+                    <i class="fas fa-car"></i> Garage: 2</div>
+                </div>
+                <div class="row py-2 text-secondary">
+                  <div class="col-6">
+                    <i class="fas fa-bed"></i> Bedrooms: 3</div>
+                  <div class="col-6">
+                    <i class="fas fa-bath"></i> Bathrooms: 2</div>
+                </div>
+                <hr>
+                <div class="row py-2 text-secondary">
+                  <div class="col-6">
+                    <i class="fas fa-user"></i> Kyle Brown</div>
+                </div>
+                <div class="row text-secondary pb-2">
+                  <div class="col-6">
+                    <i class="fas fa-clock"></i> 5 days ago</div>
+                </div>
+                <hr>
+                <a href="listing.html" class="btn btn-primary btn-block">More Info</a>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Listing 2 -->
+          <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card listing-preview">
+              <img class="card-img-top" src="images/Olivje.jpg" alt="" width="300px" height="200px">
+              <div class="card-img-overlay">
+                <h2>
+                  <span class="badge badge-secondary text-white">$550,000</span>
+                </h2>
+              </div>
+              <div class="card-body">
+                <div class="listing-heading text-center">
+                  <h4 class="text-primary">18 Jefferson Lane</h4>
+                  <p>
+                    <i class="fas fa-map-marker text-secondary"></i> Woburn MA, 01801</p>
+                </div>
+                <hr>
+                <div class="row py-2 text-secondary">
+                  <div class="col-6">
+                    <i class="fas fa-th-large"></i> Sqft: 3200</div>
+                  <div class="col-6">
+                    <i class="fas fa-car"></i> Garage: 1</div>
+                </div>
+                <div class="row py-2 text-secondary">
+                  <div class="col-6">
+                    <i class="fas fa-bed"></i> Bedrooms: 4</div>
+                  <div class="col-6">
+                    <i class="fas fa-bath"></i> Bathrooms: 2.5</div>
+                </div>
+                <hr>
+                <div class="row py-2 text-secondary">
+                  <div class="col-6">
+                    <i class="fas fa-user"></i> Mark Hudson</div>
+                </div>
+                <div class="row text-secondary pb-2">
+                  <div class="col-6">
+                    <i class="fas fa-clock"></i> 5 days ago</div>
+                </div>
+                <hr>
+                <a href="listing.html" class="btn btn-primary btn-block">More Info</a>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Listing 3 -->
+          <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card listing-preview">
+              <img class="card-img-top" src="images/Olivje.jpg" alt="" width="300px" height="200px">
+              <div class="card-img-overlay">
+                <h2>
+                  <span class="badge badge-secondary text-white">$580,000</span>
+                </h2>
+              </div>
+              <div class="card-body">
+                <div class="listing-heading text-center">
+                  <h4 class="text-primary">187 Woodrow Street</h4>
+                  <p>
+                    <i class="fas fa-map-marker text-secondary"></i> Salem MA, 01915</p>
+                </div>
+                <hr>
+                <div class="row py-2 text-secondary">
+                  <div class="col-6">
+                    <i class="fas fa-th-large"></i> Sqft: 3107</div>
+                  <div class="col-6">
+                    <i class="fas fa-car"></i> Garage: 0</div>
+                </div>
+                <div class="row py-2 text-secondary">
+                  <div class="col-6">
+                    <i class="fas fa-bed"></i> Bedrooms: 4</div>
+                  <div class="col-6">
+                    <i class="fas fa-bath"></i> Bathrooms: 3</div>
+                </div>
+                <hr>
+                <div class="row py-2 text-secondary">
+                  <div class="col-6">
+                    <i class="fas fa-user"></i> Mark Hudson</div>
+                </div>
+                <div class="row text-secondary pb-2">
+                  <div class="col-6">
+                    <i class="fas fa-clock"></i> 5 days ago</div>
+                </div>
+                <hr>
+                <a href="listing.html" class="btn btn-primary btn-block">More Info</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Listing 4 -->
+          <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card listing-preview">
+                <img class="card-img-top" src="images/Olivje.jpg" alt="" width="300px" height="200px">
+                <div class="card-img-overlay">
+                  <h2>
+                    <span class="badge badge-secondary text-white">$580,000</span>
+                  </h2>
+                </div>
+                <div class="card-body">
+                  <div class="listing-heading text-center">
+                    <h4 class="text-primary">187 Woodrow Street</h4>
+                    <p>
+                      <i class="fas fa-map-marker text-secondary"></i> Salem MA, 01915</p>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                    <div class="col-6">
+                      <i class="fas fa-th-large"></i> Sqft: 3107</div>
+                    <div class="col-6">
+                      <i class="fas fa-car"></i> Garage: 0</div>
+                  </div>
+                  <div class="row py-2 text-secondary">
+                    <div class="col-6">
+                      <i class="fas fa-bed"></i> Bedrooms: 4</div>
+                    <div class="col-6">
+                      <i class="fas fa-bath"></i> Bathrooms: 3</div>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                    <div class="col-6">
+                      <i class="fas fa-user"></i> Mark Hudson</div>
+                  </div>
+                  <div class="row text-secondary pb-2">
+                    <div class="col-6">
+                      <i class="fas fa-clock"></i> 5 days ago</div>
+                  </div>
+                  <hr>
+                  <a href="listing.html" class="btn btn-primary btn-block">More Info</a>
+                </div>
+              </div>
+            </div>
+
+          <!-- Listings 5 -->
+          <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card listing-preview">
+                <img class="card-img-top" src="images/Olivje.jpg" alt="" width="300px" height="200px">
+                <div class="card-img-overlay">
+                  <h2>
+                    <span class="badge badge-secondary text-white">$580,000</span>
+                  </h2>
+                </div>
+                <div class="card-body">
+                  <div class="listing-heading text-center">
+                    <h4 class="text-primary">187 Woodrow Street</h4>
+                    <p>
+                      <i class="fas fa-map-marker text-secondary"></i> Salem MA, 01915</p>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                    <div class="col-6">
+                      <i class="fas fa-th-large"></i> Sqft: 3107</div>
+                    <div class="col-6">
+                      <i class="fas fa-car"></i> Garage: 0</div>
+                  </div>
+                  <div class="row py-2 text-secondary">
+                    <div class="col-6">
+                      <i class="fas fa-bed"></i> Bedrooms: 4</div>
+                    <div class="col-6">
+                      <i class="fas fa-bath"></i> Bathrooms: 3</div>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                    <div class="col-6">
+                      <i class="fas fa-user"></i> Mark Hudson</div>
+                  </div>
+                  <div class="row text-secondary pb-2">
+                    <div class="col-6">
+                      <i class="fas fa-clock"></i> 5 days ago</div>
+                  </div>
+                  <hr>
+                  <a href="listing.html" class="btn btn-primary btn-block">More Info</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Listings 6 -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card listing-preview">
+                  <img class="card-img-top" src="images/Olivje.jpg" alt="" width="300px" height="200px">
+                  <div class="card-img-overlay">
+                    <h2>
+                      <span class="badge badge-secondary text-white">$580,000</span>
+                    </h2>
+                  </div>
+                  <div class="card-body">
+                    <div class="listing-heading text-center">
+                      <h4 class="text-primary">187 Woodrow Street</h4>
+                      <p>
+                        <i class="fas fa-map-marker text-secondary"></i> Salem MA, 01915</p>
+                    </div>
+                    <hr>
+                    <div class="row py-2 text-secondary">
+                      <div class="col-6">
+                        <i class="fas fa-th-large"></i> Sqft: 3107</div>
+                      <div class="col-6">
+                        <i class="fas fa-car"></i> Garage: 0</div>
+                    </div>
+                    <div class="row py-2 text-secondary">
+                      <div class="col-6">
+                        <i class="fas fa-bed"></i> Bedrooms: 4</div>
+                      <div class="col-6">
+                        <i class="fas fa-bath"></i> Bathrooms: 3</div>
+                    </div>
+                    <hr>
+                    <div class="row py-2 text-secondary">
+                      <div class="col-6">
+                        <i class="fas fa-user"></i> Mark Hudson</div>
+                    </div>
+                    <div class="row text-secondary pb-2">
+                      <div class="col-6">
+                        <i class="fas fa-clock"></i> 5 days ago</div>
+                    </div>
+                    <hr>
+                    <a href="listing.html" class="btn btn-primary btn-block">More Info</a>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="services" class="py-5 bg-secondary text-white">
+        <div class="container">
+          <div class="row text-center">
+            <div class="col-md-6" id="images-me-university">
+              <img src="images/Gerb_mgtu.png" alt="" width="250px" height="250px">
+              <hr>
+              <h3>Propery Management</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+                hic dignissimos ratione ea quae.</p>
+            </div>
+            <div class="col-md-6" id="images-me-university">
+              <img src="images/Information_Security.png" alt="" width="250px" height="250px">
+              <hr>
+              <h3>Renting & Selling</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+                hic dignissimos ratione ea quae.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+</body>
+</html>

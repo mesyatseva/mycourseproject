@@ -1,0 +1,19 @@
+{% extends 'CookBook/layout/base.html' %}
+
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %} Правка рецепта {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 style="text-align: center">Удаление рецепта</h1>
+
+        <h3>Вы точно хотите удалить рецепт?</h3>
+        <form method="post">
+            {% csrf_token %}
+{#            <input type="submit" value="Удалить">#}
+            <button class="btn btn-primary btn-block btn-lg"> Удалить </button>
+        </form>
+    </div>
+{% endblock %}

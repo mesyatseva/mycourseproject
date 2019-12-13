@@ -1,0 +1,167 @@
+{% extends 'CookBook/layout/base.html' %}
+
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <!-- Showcase -->
+    <section id="showcase">
+        <div class="container text-center">
+            <div class="home-search p-5">
+                <div class="overlay p-5">
+                    <h1 class="display-4 mb-4" id="primer">
+                        Проголодались?
+                    </h1>
+                    <p class="lead">Здесь вы обязательно найдете тот рецепт,
+                        по которому захотите приготовить!
+                    </p>
+                    {# Оттуда ПОИСК #}
+                    <div class="search">
+                        <form action="{% url 'CookBook:search' %}">
+                            <!-- Form Row 1 -->
+                            <div class="form-row">
+                                <!-- Кухня -->
+{#                            </div>#}
+{#                                <div class="col-md-6 mb-3">#}
+{#                                    <select name="kitchen_select" class="form-control">#}
+{##}
+{#                                        <label class="sr-only">Кухня</label>#}
+{#                                        <option selected="true" disabled="disabled">Кухня: Не важно</option>#}
+{#                                        {% for kitchen in kitchens %}#}
+{#                                            <option value="{{ kitchen.slug }}">{{ kitchen.name }}</option>#}
+{#                                        {% endfor %}#}
+{#                                    </select>#}
+{#                                </div>#}
+
+                                <!-- Название ингредиента -->
+                                <div class="col-md-12 mb-3">
+                                    <label class="sr-only">Ингредиент</label>
+                                    <input type="text" name="food_keyword" class="form-control"
+                                           placeholder="Название ингредиента (с большой буквы)">
+                                </div>
+                            </div>
+
+                            <!-- Form Row 2 -->
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <!-- Время приготовления -->
+                                    <label class="sr-only">Время готовки</label>
+                                    <select name="cooktime" class="form-control">
+                                        <option selected="true" disabled="disabled">Время приготовления: Не важно</option>
+                                            {% for key, value in cooktime_choices.items %}
+                                            <option value="{{ key }}">{{ value }}</option>
+                                            {% endfor %}
+{#                                    </option>#}
+                                    </select>
+                                </div>
+
+                                <!-- Трудность в приготовлении -->
+                                <div class="col-md-6 mb-3">
+                                    <select name="dificulty_choices" class="form-control" id="type">
+                                        <option selected="true" disabled="disabled">Сложность: Любая</option>
+{#                                        <option value="very_easy">Очень легко</option>#}
+{#                                        <option value="easy">Легко</option>#}
+{#                                        <option value="normal">Нормально</option>#}
+{#                                        <option value="hard">Тяжело</option>#}
+{#                                        <option value="very_hard">Очень тяжело</option>#}
+                                        {% for key, value in difficulty_choices.items %}
+                                            <option value="{{ key }}">{{ value }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+
+                                <div class="col-md-12 mb-3">
+                                    <label class="sr-only">Рецепт</label>
+                                    <input type="text" name="recept" class="form-control"
+                                           placeholder="Введите название рецепта">
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary btn-block mt-4" type="submit">Начать поиск</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="listings" class="py-5">
+        <div class="container">
+            <h3 class="text-center mb-3">Последние публикации</h3>
+
+            <div class="row">
+
+            {% if user.is_authenticated %}
+                <div class="col-md-6 mb-4">
+                    <a href="{% url 'CookBook:create_recipe' %}" class="btn btn-primary btn-block">+ Добавить новый рецепт</a>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <a href="{% url 'CookBook:profile' %}" class="btn btn-primary btn-block">Посмотреть свой профиль</a>
+                </div>
+            {% endif %}
+
+
+
+                {% for recipe in last_recipes %}
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card listing-preview">
+
+                            <!-- Картинки -->
+                            {% if recipe.image %}
+                            <img class="card-img-top" src="{{ recipe.image.url }}" alt="" width="300px"
+                                 height="250px">
+                            {% else %}
+                            <img class="card-img-top" src="{% static 'CookBook/images/NoPhotoSorry.jfif' %}" alt="" width="300px"
+                                 height="250px">
+                            {% endif%}
+
+
+                            <div class="card-body">
+                                <div class="listing-heading text-center">
+{#                                    <h4 class="text-primary"><a href="#"> {{ recipe.name }}</a></h4>#}
+                                    <h4 class="text-primary"><a href="{% url 'CookBook:detail' pk=recipe.pk  %}"> {{ recipe.name }}</a></h4>
+                                    <p>
+                                        {{ recipe.kitchen }},  {{ recipe.dish }} </p>
+                                </div>
+                                <hr>
+                                <div class="row py text-secondary">
+                                    <div class="col-12">
+                                        <i class="fas fa-th-large"></i> {{ recipe.description|truncatechars:30 }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row py-2 text-secondary">
+
+                                    <div class="col-6">
+                                        <i class="fas fa-bed"></i>Время приготовления: {{ recipe.cooktime }}
+                                    </div>
+
+                                    <div class="col-6">
+                                        <i class="fas fa-bath"></i> Сложность: {{ recipe.difficulty.title }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row py-2 text-secondary">
+                                    <div class="col-6">
+                                        <i class="fas fa-user"></i> {{ recipe.author }}
+                                    </div>
+                                </div>
+                                <div class="row text-secondary pb-2">
+                                    <div class="col-6">
+                                        <i class="fas fa-clock"></i> {{ recipe.created_at }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <a href="{% url 'CookBook:detail' pk=recipe.pk %}" class="btn btn-primary btn-block">Нажмите, чтобы узнать больше</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
